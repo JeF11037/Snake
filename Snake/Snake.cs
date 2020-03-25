@@ -21,6 +21,18 @@ namespace Snake
             }
         }
 
+        public void refresh(int width, int height)
+        {
+            Random random = new Random();
+            int num = pointList.Count();
+            foreach (var point in pointList)
+            {
+                point.x = random.Next(30, width - 30) - num;
+                point.y = random.Next(5, height - 5);
+                num--;
+            }
+        }
+
         internal void Move()
         {
             Point tail = pointList.First();

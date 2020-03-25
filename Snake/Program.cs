@@ -7,52 +7,89 @@ namespace Snake
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(80, 30);
+
             int width = Console.WindowWidth;
             int height = Console.WindowHeight;
 
             int time = 100;
+            int score = 0;
+
+            bool gameOn = false;
 
             Console.CursorVisible = false;
             Console.SetBufferSize(width, height);
 
+            Console.Title = "Snake Game";
+
             Walls walls = new Walls(width, height);
-            walls.Draw();
-
             Random random = new Random();
-            Point point = new Point(random.Next(30, width - 30), random.Next(5, height - 5), '#');
+            Point point = new Point(random.Next(30, width - 30), random.Next(5, height - 5), '+');
             Snake snake = new Snake(point, 4, Direction.right);
-            snake.Draw();
-
             FoodCreator foodCreator = new FoodCreator(width, height, 'o');
             Point food = foodCreator.CreateFood();
-            food.Draw();
+
+            GameManager menu = new GameManager(width, height);
+            menu.menu();
 
             while (true)
             {
-                if (walls.IsHit(snake) || snake.IsHitTail())
-                {
-                    break;
-                }
-                if (snake.Eat(food))
-                {
-                    food = foodCreator.CreateFood();
-                    food.Draw();
-
-                    if (time >= 80)
-                        time--;
-
-                }
-                else
-                {
-                    snake.Move();
-                }
-
-                Thread.Sleep(time);
-
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
-                    snake.HandleKey(key.Key);
+                    if (key.Key == ConsoleKey.Enter)
+                    {
+                        Console.Clear();
+
+                        gameOn = true;
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        walls.Draw();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        food.Draw();
+                    }
+                }
+                while (gameOn)
+                {
+                    if (walls.IsHit(snake) || snake.IsHitTail())
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.SetCursorPosition(38, 15);
+                        Console.WriteLine("Game Over");
+                        Thread.Sleep(1000);
+                        gameOn = false;
+                        menu.menu();
+                        snake.refresh(width, height);
+                        break;
+                    }
+                    if (snake.Eat(food))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        food = foodCreator.CreateFood();
+                        food.Draw();
+
+                        if (time >= 50)
+                            time = time - 5;
+
+                        score++;
+
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        snake.Move();
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.SetCursorPosition(5, 2);
+                    Console.WriteLine("Your score: " + score);
+
+                    Thread.Sleep(time);
+
+                    if (Console.KeyAvailable)
+                    {
+                        ConsoleKeyInfo key = Console.ReadKey();
+                        snake.HandleKey(key.Key);
+                    }
                 }
             }
         }
