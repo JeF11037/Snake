@@ -33,7 +33,7 @@ namespace Snake
             menu.menu();
 
             Sound music = new Sound();
-            music.background_music();
+            music.music(@"C:\Users\levpe\Documents\Project_CS\Snake\Snake_Game\JeF11037-Guitar8D.wav");
 
             while (true)
             {
@@ -53,7 +53,6 @@ namespace Snake
                         walls.Draw();
                         Console.ForegroundColor = ConsoleColor.Red;
                         food.Draw();
-                        music.stop();
                     }
                 }
                 while (gameOn)
@@ -61,7 +60,7 @@ namespace Snake
                     if (walls.IsHit(snake) || snake.IsHitTail())
                     {
                         menu.name_writter(score);
-                        music.game_over();
+                        music.music(@"C:\Users\levpe\Documents\Project_CS\Snake\Snake_Game\76376__deleted-user-877451__game-over.wav");
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.SetCursorPosition(38, 15);
@@ -74,7 +73,7 @@ namespace Snake
                     }
                     if (snake.Eat(food))
                     {
-                        music.chewing();
+                        music.music(@"C:\Users\levpe\Documents\Project_CS\Snake\Snake_Game\429593__inspectorj__chewing-breadstick-single-b.wav");
                         Console.ForegroundColor = ConsoleColor.Red;
                         food = foodCreator.CreateFood();
                         food.Draw();
