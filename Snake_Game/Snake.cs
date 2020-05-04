@@ -21,15 +21,17 @@ namespace Snake
             }
         }
 
-        public void refresh(int width, int height)
+        public void refresh(int width, int height, char char_, int length)
         {
             Random random = new Random();
-            int num = pointList.Count();
-            foreach (var point in pointList)
+            Point point_ = new Point(random.Next(20, width - 20), random.Next(10, height - 10), char_);
+            direction = Direction.right;
+            pointList = new List<Point>();
+            for (int tick = 0; tick < length; tick++)
             {
-                point.x = random.Next(30, width - 30) - num;
-                point.y = random.Next(5, height - 5);
-                num--;
+                Point point = new Point(point_);
+                point.Move(tick, direction);
+                pointList.Add(point);
             }
         }
 

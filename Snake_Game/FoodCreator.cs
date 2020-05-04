@@ -10,6 +10,9 @@ namespace Snake
         int mapHeight;
         char sym;
 
+        int x;
+        int y;
+
         Random random = new Random();
 
         public FoodCreator(int mapWidth, int mapHeight, char sym)
@@ -21,10 +24,9 @@ namespace Snake
 
         public Point CreateFood()
         {
-            int x = random.Next(2, mapWidth - 2);
-            int y = random.Next(5, mapHeight - 2);
+            x = random.Next(2, mapWidth - 2);
+            y = random.Next(5, mapHeight - 2);
             return new Point(x, y, sym);
         }
-
     }
 }

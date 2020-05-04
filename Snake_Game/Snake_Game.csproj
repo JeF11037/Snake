@@ -48,11 +48,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Custom.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Figure.cs" />
     <Compile Include="FoodCreator.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="HorizontalLine.cs" />
+    <Compile Include="Levels.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +72,8 @@
     <Content Include="76376__deleted-user-877451__game-over.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Guitar2.mp3" />
+    <Content Include="Guitar3.wav" />
     <Content Include="JeF11037-Guitar8D.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

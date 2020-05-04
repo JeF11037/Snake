@@ -11,4 +11,11 @@ namespace Snake
         up,
         down
     }
+    enum AppleDirection
+    {
+        left,
+        right,
+        up,
+        down
+    }
 }
